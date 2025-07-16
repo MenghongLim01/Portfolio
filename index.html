@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menghong Lim - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #334155; /* Dark slate gray text */
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #1e293b; /* Darker slate gray */
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #3b82f6; /* Blue accent */
+            border-radius: 9999px; /* rounded-full */
+        }
+        .nav-link {
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .nav-link:hover {
+            color: #3b82f6; /* Blue accent on hover */
+            transform: translateY(-2px);
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05); /* Larger shadow on hover */
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* Blue */
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* Darker blue */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .icon-link {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .icon-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: #3b82f6; /* Blue accent on hover */
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section Styling */
+        #hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #3b82f6, #6366f1); /* Initial gradient */
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #hero .container {
+            position: relative;
+            z-index: 2; /* Ensure content is above particles */
+        }
+
+        /* Typing Effect for Hero Tagline */
+        .typing-effect::after {
+            content: '|';
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        /* Floating animation for hero icon */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Pulse animation for skill badges */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+        }
+        .skill-badge {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Enhanced fade-in animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Apply animations */
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideInFromBottom 0.8s ease-out forwards;
+        }
+
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 0.1s; opacity: 0; }
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-300 { animation-delay: 0.3s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+        .delay-500 { animation-delay: 0.5s; opacity: 0; }
+        .delay-600 { animation-delay: 0.6s; opacity: 0; }
+        .delay-700 { animation-delay: 0.7s; opacity: 0; }
+
+        /* Skill badge hover effect */
+        .skill-badge-hover {
+            transition: all 0.3s ease;
+        }
+        .skill-badge-hover:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Enhanced card animations */
+        .card-animate {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-animate:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Button ripple effect */
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-ripple::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
+            transform: translate(-50%, -50%);
+        }
+        .btn-ripple:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay for sequential animations */
+        .reveal-item:nth-child(1) { transition-delay: 0s; }
+        .reveal-item:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-item:nth-child(3) { transition-delay: 0.2s; }
+        .reveal-item:nth-child(4) { transition-delay: 0.3s; }
+        .reveal-item:nth-child(5) { transition-delay: 0.4s; }
+        .reveal-item:nth-child(6) { transition-delay: 0.5s; }
+        .reveal-item:nth-child(7) { transition-delay: 0.6s; }
+        .reveal-item:nth-child(8) { transition-delay: 0.7s; }
+        /* Add more as needed for lists like skills */
+
+        /* Specific delays for section content */
+        #about .card { transition-delay: 0.2s; }
+        #experience .card > div { transition-delay: 0.2s; }
+        #skills .card > div { transition-delay: 0.2s; }
+        #education .card > div { transition-delay: 0.2s; }
+        #contact .card { transition-delay: 0.2s; }
+
+        /* Profile image styling */
+        .profile-image-container {
+            position: relative;
+            width: 16rem; /* w-64 */
+            height: 16rem; /* h-64 */
+            border-radius: 9999px; /* rounded-full */
+            overflow: hidden;
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.3), 0 0 0 16px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-image-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.5), 0 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 9999px;
+        }
+
+        /* Wave Divider SVG Styling */
+        .wave-divider {
+            position: relative;
+            width: 100%;
+            height: 100px; /* Adjust height as needed */
+            overflow: hidden;
+            background-color: transparent; /* Ensure it doesn't block content */
+        }
+        .wave-divider svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            fill: #f8fafc; /* Match background color of the next section */
+        }
+        .wave-divider.top-wave svg {
+            transform: rotate(180deg);
+            top: 0;
+            fill: #f8fafc; /* Match background of current section */
+        }
+
+        /* Adjust for larger screens */
+        @media (min-width: 768px) {
+            .profile-image-container {
+                width: 20rem; /* md:w-80 */
+                height: 20rem; /* md:h-80 */
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-gray-800">Menghong Lim</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-500">About</a>
+                <a href="#experience" class="nav-link text-gray-600 hover:text-blue-500">Experience</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-blue-500">Skills</a>
+                <a href="#education" class="nav-link text-gray-600 hover:text-blue-500">Education</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-500">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-500 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-inner">
+            <a href="#about" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About</a>
+            <a href="#experience" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Experience</a>
+            <a href="#skills" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Skills</a>
+            <a href="#education" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Education</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white min-h-screen flex items-center justify-center pt-20 pb-10">
+        <canvas id="particles-js"></canvas>
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <div class="animate-fade-in-up">
+                <!-- Decorative icon -->
+                <div class="mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 bg-white bg-opacity-20 rounded-full mb-6 float-animation animate-scale-in delay-100">
+                        <i class="fas fa-code text-4xl text-white"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 animate-fade-in-up delay-200">
+                    Hi, I'm <span class="text-yellow-300">Menghong Lim</span>
+                </h1>
+                
+                <p id="hero-tagline" class="text-2xl md:text-3xl font-light mb-8 typing-effect max-w-3xl mx-auto animate-fade-in-up delay-300"></p>
+                
+                <!-- Highlight skills badges -->
+                <div class="flex flex-wrap justify-center gap-3 mb-8 animate-fade-in-up delay-400">
+                    <span class="bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium skill-badge-hover animate-fade-in-up delay-500">
+                        <i class="fab fa-python mr-2"></i>Python
+                    </span>
+                    <span class="bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium skill-badge-hover animate-fade-in-up delay-600">
+                        <i class="fab fa-java mr-2"></i>Java
+                    </span>
+                    <span class="bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium skill-badge-hover animate-fade-in-up delay-700">
+                        <i class="fab fa-js-square mr-2"></i>JavaScript
+                    </span>
+                    <span class="bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium skill-badge-hover animate-fade-in-up delay-500">
+                        <i class="fas fa-database mr-2"></i>SQL
+                    </span>
+                    <span class="bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium skill-badge-hover animate-fade-in-up delay-600">
+                        <i class="fab fa-react mr-2"></i>React
+                    </span>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up delay-500">
+                    <a href="#contact" class="btn-primary btn-ripple inline-block text-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
+                        <i class="fas fa-envelope mr-2"></i>Get In Touch
+                    </a>
+                    <a href="#about" class="btn-primary btn-ripple inline-block text-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-105 bg-white text-blue-600 hover:bg-gray-100 border border-blue-600">
+                        <i class="fas fa-user mr-2"></i>Learn More
+                    </a>
+                    <a href="https://github.com/MenghongLim01" target="_blank" class="btn-primary btn-ripple inline-block text-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-105 bg-transparent border-2 border-white hover:bg-white hover:text-blue-600">
+                        <i class="fab fa-github mr-2"></i>View GitHub
+                    </a>
+                </div>
+                
+                <!-- Scroll indicator -->
+                <div class="mt-12 animate-fade-in-up delay-700">
+                    <div class="animate-bounce">
+                        <i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider between Hero and About -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,64L48,74.7C96,85,192,107,288,101.3C384,96,480,64,576,53.3C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,59,1392,50.7L1440,43L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+        </svg>
+    </div>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mx-auto reveal-item">About Me</h2>
+            <div class="card card-animate max-w-3xl mx-auto text-lg leading-relaxed text-gray-700 reveal-item">
+                <p class="mb-4 reveal-item">I am a third-year Computer Science student at Paragon International University with a strong passion for technology and problem-solving. I am eager to learn and grow in software development, with a keen interest in programming, algorithms, and system design.</p>
+                <p class="mb-4 reveal-item">Motivated and adaptable, I am looking for opportunities to apply my knowledge in real-world projects and expand my skills in a professional environment.</p>
+                <p class="reveal-item">My previous internship experience at AIA Cambodia provided me with valuable insights into teamwork, communication, and time management. I am confident that my technical abilities, combined with my passion for technology and problem-solving, make me an excellent candidate for any challenging role.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider between About and Experience -->
+    <div class="wave-divider top-wave">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,64L48,74.7C96,85,192,107,288,101.3C384,96,480,64,576,53.3C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,59,1392,50.7L1440,43L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+        </svg>
+    </div>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mx-auto reveal-item">Experience</h2>
+            <div class="card card-animate max-w-3xl mx-auto space-y-8 reveal-item">
+                <!-- Experience 1 -->
+                <div class="border-l-4 border-blue-500 pl-4 reveal-item card-animate bg-blue-50 p-4 rounded-r-lg">
+                    <h3 class="text-xl font-semibold text-gray-800">Personal Assistant</h3>
+                    <p class="text-gray-600">AIA Cambodia, Phnom Penh, Cambodia</p>
+                    <p class="text-sm text-gray-500 mb-2">Oct 2022 - Feb 2023</p>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li>Gained valuable insights into teamwork and communication.</li>
+                        <li>Developed strong time management skills in a professional setting.</li>
+                        <!-- Add more bullet points if you have specific responsibilities/achievements -->
+                    </ul>
+                </div>
+                <!-- Experience 2 -->
+                <div class="border-l-4 border-blue-500 pl-4 reveal-item card-animate bg-blue-50 p-4 rounded-r-lg">
+                    <h3 class="text-xl font-semibold text-gray-800">Logistic</h3>
+                    <p class="text-gray-600">Phnom Penh Saat, Phnom Penh, Cambodia</p>
+                    <p class="text-sm text-gray-500 mb-2">Feb 2023 - May 2023</p>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li>Managed logistical operations and coordination.</li>
+                        <li>Contributed to efficient project execution.</li>
+                        <!-- Add more bullet points if you have specific responsibilities/achievements -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider between Experience and Skills -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,64L48,74.7C96,85,192,107,288,101.3C384,96,480,64,576,53.3C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,59,1392,50.7L1440,43L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+        </svg>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mx-auto reveal-item">Skills</h2>
+            <div class="card card-animate max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-item">
+                <!-- Programming Languages -->
+                <div class="reveal-item card-animate bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg border-2 border-blue-100 hover:border-blue-300">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800"><i class="fas fa-code text-blue-500 mr-2"></i>Programming Languages</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>C/C++</li>
+                        <li>JavaScript</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+
+                <!-- Web Development -->
+                <div class="reveal-item card-animate bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border-2 border-green-100 hover:border-green-300">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800"><i class="fas fa-globe text-green-500 mr-2"></i>Web Development</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript (React, Node.js)</li>
+                    </ul>
+                </div>
+
+                <!-- Databases -->
+                <div class="reveal-item card-animate bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border-2 border-purple-100 hover:border-purple-300">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800"><i class="fas fa-database text-purple-500 mr-2"></i>Databases</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>MySQL</li>
+                        <li>PostgreSQL</li>
+                    </ul>
+                </div>
+
+                <!-- Software Development -->
+                <div class="reveal-item card-animate bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-lg border-2 border-orange-100 hover:border-orange-300">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800"><i class="fas fa-laptop-code text-orange-500 mr-2"></i>Software Development</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Object-Oriented Programming (OOP)</li>
+                        <li>Git, GitHub (Version Control)</li>
+                    </ul>
+                </div>
+
+                <!-- Mobile App Development -->
+                <div class="reveal-item card-animate bg-gradient-to-br from-pink-50 to-rose-50 p-6 rounded-lg border-2 border-pink-100 hover:border-pink-300">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800"><i class="fas fa-mobile-alt text-pink-500 mr-2"></i>Mobile App Development</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Android</li>
+                        <li>Flutter</li>
+                    </ul>
+                </div>
+
+                <!-- Cloud & Networking -->
+                <div class="reveal-item card-animate bg-gradient-to-br from-cyan-50 to-teal-50 p-6 rounded-lg border-2 border-cyan-100 hover:border-cyan-300">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800"><i class="fas fa-cloud text-cyan-500 mr-2"></i>Cloud & Networking</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>DigitalOcean (Cloud Computing)</li>
+                        <li>TCP/IP, HTTP (Networking Protocols)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider between Skills and Education -->
+    <div class="wave-divider top-wave">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,64L48,74.7C96,85,192,107,288,101.3C384,96,480,64,576,53.3C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,59,1392,50.7L1440,43L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+        </svg>
+    </div>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mx-auto reveal-item">Education</h2>
+            <div class="card card-animate max-w-3xl mx-auto space-y-8 reveal-item">
+                <div class="border-l-4 border-blue-500 pl-4 reveal-item card-animate bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-r-lg border-2 border-blue-100">
+                    <h3 class="text-xl font-semibold text-gray-800">Bachelor of Science in Computer Science</h3>
+                    <p class="text-gray-600">Paragon International University, Phnom Penh, Cambodia</p>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li>Currently a third-year student.</li>
+                        <!-- Add any relevant coursework or achievements here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider between Education and Contact -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,64L48,74.7C96,85,192,107,288,101.3C384,96,480,64,576,53.3C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,59,1392,50.7L1440,43L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+        </svg>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mx-auto reveal-item">Contact Me</h2>
+            <div class="card card-animate max-w-2xl mx-auto text-center reveal-item">
+                <p class="text-lg text-gray-700 mb-6 reveal-item">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <div class="flex flex-col items-center space-y-4 mb-8">
+                    <div class="flex items-center text-gray-800 text-lg reveal-item card-animate bg-blue-50 p-3 rounded-lg hover:bg-blue-100 w-full max-w-sm">
+                        <i class="fas fa-envelope text-blue-500 mr-3"></i>
+                        <span>limmenghong678@gmail.com</span>
+                    </div>
+                    <div class="flex items-center text-gray-800 text-lg reveal-item card-animate bg-green-50 p-3 rounded-lg hover:bg-green-100 w-full max-w-sm">
+                        <i class="fas fa-phone-alt text-green-500 mr-3"></i>
+                        <span>+855 92 914 664</span>
+                    </div>
+                    <div class="flex items-center text-gray-800 text-lg reveal-item card-animate bg-cyan-50 p-3 rounded-lg hover:bg-cyan-100 w-full max-w-sm">
+                        <i class="fab fa-telegram-plane text-cyan-500 mr-3"></i>
+                        <span>@lim_menghong</span>
+                    </div>
+                    <div class="flex items-center text-gray-800 text-lg reveal-item card-animate bg-purple-50 p-3 rounded-lg hover:bg-purple-100 w-full max-w-sm">
+                        <i class="fas fa-map-marker-alt text-purple-500 mr-3"></i>
+                        <span>Phnom Penh, Cambodia</span>
+                    </div>
+                </div>
+                <div class="flex justify-center space-x-6 text-3xl reveal-item">
+                    <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" target="_blank" class="text-gray-600 hover:text-blue-500 icon-link card-animate p-3 rounded-full bg-blue-50 hover:bg-blue-100" aria-label="LinkedIn Profile">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/MenghongLim01" target="_blank" class="text-gray-600 hover:text-gray-800 icon-link card-animate p-3 rounded-full bg-gray-50 hover:bg-gray-100" aria-label="GitHub Profile">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <!-- Add more social links if you have them -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Menghong Lim. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside (optional, but good for UX)
+        document.addEventListener('click', (event) => {
+            const isClickInside = mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target);
+            if (!isClickInside && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Typing Effect for Hero Tagline
+        const taglineElement = document.getElementById('hero-tagline');
+        const taglines = [
+            "Always learning, always improving—one line of code at a time.",
+            "Exploring tech with curiosity and an open mind.",
+            "Building today, growing for tomorrow."
+        ];
+        let taglineIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 70; // milliseconds per character
+        let deletingSpeed = 40; // milliseconds per character
+        let delayBeforeTypingNext = 1500; // milliseconds before typing next tagline
+
+        function typeEffect() {
+            const currentTagline = taglines[taglineIndex];
+            if (isDeleting) {
+                taglineElement.textContent = currentTagline.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                taglineElement.textContent = currentTagline.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let currentTypingSpeed = typingSpeed;
+            if (isDeleting) {
+                currentTypingSpeed = deletingSpeed;
+            }
+
+            if (!isDeleting && charIndex === currentTagline.length) {
+                currentTypingSpeed = delayBeforeTypingNext;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                taglineIndex = (taglineIndex + 1) % taglines.length;
+                currentTypingSpeed = 500; // Short delay before starting to type next tagline
+            }
+
+            setTimeout(typeEffect, currentTypingSpeed);
+        }
+
+        // Scroll Reveal Animation Logic
+        const revealElements = document.querySelectorAll('.reveal-item');
+
+        const observerOptions = {
+            root: null, // viewport as root
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of the item must be visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Particles Background Logic (Custom Simple Implementation)
+        const canvas = document.getElementById('particles-js');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const particleCount = 80;
+        const particleSize = 2;
+        const particleSpeed = 0.5;
+        const connectDistance = 100;
+
+        // Resize canvas to fill parent
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.getElementById('hero').offsetHeight;
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * particleSize + 1;
+                this.speedX = Math.random() * particleSpeed * 2 - particleSpeed;
+                this.speedY = Math.random() * particleSpeed * 2 - particleSpeed;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Bounce off edges
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectDistance) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - (distance / connectDistance)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Event Listeners for Particles
+        window.addEventListener('resize', resizeCanvas);
+
+        // Start effects when the window loads
+        window.onload = function() {
+            typeEffect();
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+        };
+    </script>
+</body>
+</html>
